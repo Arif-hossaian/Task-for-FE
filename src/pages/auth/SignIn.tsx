@@ -1,8 +1,42 @@
-import React from 'react'
+import { useState } from 'react'
 import AuthLayout from '../../layout/AuthLayout'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import clsx from 'clsx';
 
 const SignIn = () => {
+  const dispatch = useDispatch();
+  const [data, setData] = useState({
+    email:'',
+    password:''
+  })
+  const [emailError, setEmailError] = useState(false);
+  const [passwordError, setpasswordError] = useState(false);
+  const handleChange = (e:any) => {
+    const value = e.target.value;
+    setData({
+      ...data,
+      [e.target.name]: value,
+    });
+  };
+  const handleSignIn = (e:any) => {
+    e.preventDefault();
+  if (!data.email) {
+    setEmailError(true);
+  } else if (!data.password) {
+    setpasswordError(true);
+  } else {
+    setEmailError(false);
+    setpasswordError(false);
+    console.log(data);
+    // dispatch(signIn(data);
+  };
+  };
+
+  const validate = () => {
+    return !data.email && !data.password
+  }
+
   return (
    <AuthLayout>
     <div className='mx-auto max-w-screen-sm mt-16'>
@@ -11,39 +45,39 @@ const SignIn = () => {
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSignIn}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                Email address
-              </label>
+     
               <div className="mt-2">
                 <input
-                  id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
                   placeholder='your email'
-                  required
-                  className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={data.email}
+                  onChange={handleChange}
+              
+                  className={clsx(
+                    emailError == true ? 'block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400  sm:text-sm sm:leading-6' : 'block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6'
+                  )}
                 />
               </div>
             </div>
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
-                  Name
-                </label>
+             
             
               </div>
               <div className="mt-2">
                 <input
-                  id="password"
                   name="password"
                   type="password"
-                  placeholder='your name'
-                  required
-                  className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder='Enter password'
+                  value={data.password}
+                  onChange={handleChange}
+                  className={clsx(
+                    passwordError == true ? 'block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-red-600 placeholder:text-gray-400  sm:text-sm sm:leading-6' : 'block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6'
+                  )}
                 />
               </div>
             </div>
@@ -51,7 +85,11 @@ const SignIn = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+               
+                className={
+                  clsx(validate() ? 'flex w-full justify-center rounded-md bg-gray-400 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 ' : 'flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 ')
+                }
+                disabled={!validate()}
               >
                 Sign in
               </button>
