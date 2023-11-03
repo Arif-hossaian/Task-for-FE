@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../components/dashboard/Sidebar';
+import DashboardNavbar from '../components/dashboard/navbar/DashboardNavbar';
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -16,12 +17,11 @@ const DashboardLayout = () => {
         {/* <!-- ===== Content Area Start ===== --> */}
         <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {/* <!-- ===== Header Start ===== --> */}
-         navbar
+          <DashboardNavbar />
           {/* <!-- ===== Header End ===== --> */}
-
           {/* <!-- ===== Main Content Start ===== --> */}
           <main>
-            <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div className="">
               <Outlet />
             </div>
           </main>
