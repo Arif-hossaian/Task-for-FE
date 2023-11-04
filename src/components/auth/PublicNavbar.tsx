@@ -34,12 +34,9 @@ const PublicNavbar = () => {
             />
           </svg>
         </button>
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <select name="cars" id="cars">
-            <option value="volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+        <div className="hidden w-full md:block md:w-auto text-gray-400 bg-[#F0F5FA] py-2.5 px-1.5 rounded-md">
+          <select>
+            <option value="en">English(uk)</option>
           </select>
         </div>
       </div>

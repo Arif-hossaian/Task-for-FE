@@ -103,7 +103,7 @@ const SignUp = () => {
                   />
                   {error ? (
                     <span className="text-xs text-red-600 mt-2 ">
-                      plz enter a valid email address
+                      Please enter a valid email address
                     </span>
                   ) : (
                     ''

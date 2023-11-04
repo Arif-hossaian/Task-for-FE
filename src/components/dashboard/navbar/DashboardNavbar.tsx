@@ -10,7 +10,7 @@ const DashboardNavbar = () => {
               <div className="relative w-full mx-2 md:w-2/3 lg:w-2/3">
                 <input
                   type="search"
-                  className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-[#F0F5FA] rounded-r-lg  "
+                  className="block p-3 w-full z-20 text-sm text-gray-900 bg-[#F0F5FA] rounded-lg  "
                   placeholder="Search..."
                 />
                 <button
@@ -47,7 +47,7 @@ const DashboardNavbar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 text-gray-500"
               >
                 <path
                   strokeLinecap="round"
@@ -58,7 +58,7 @@ const DashboardNavbar = () => {
             </div>
             <div className="ml-10">
               <img
-                className="w-10 h-10 rounded-lg"
+                className="w-12 h-12 rounded-full"
                 src="https://reqres.in/img/faces/7-image.jpg"
                 alt=""
               />

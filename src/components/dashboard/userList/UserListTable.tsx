@@ -4,7 +4,7 @@ const UserListTable: FC<any> = ({ dataList, page }) => {
   return (
     <div className="relative overflow-x-auto  sm:rounded-lg">
       <table className="w-full text-sm text-left text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
+        <thead className="text-xs text-gray-500 uppercase bg-gray-50 ">
           <tr>
             <th scope="col" className="p-4">
               #ID
@@ -26,14 +26,14 @@ const UserListTable: FC<any> = ({ dataList, page }) => {
               <td className="w-4 p-4">{i.id}</td>
               <th
                 scope="row"
-                className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap "
+                className="flex items-center px-6 py-4  whitespace-nowrap "
               >
                 <img className="w-16 h-16 rounded-lg" src={i.avatar} alt="" />
                 <div className="pl-3">
-                  <div className="text-base font-semibold">{`${i.first_name} ${i.last_name}`}</div>
+                  <div className="text-gray-500 font-semibold">{`${i.first_name} ${i.last_name}`}</div>
                 </div>
               </th>
-              <td className="px-6 py-4">{i.email}</td>
+              <td className="px-6 py-4 text-gray-600">{i.email}</td>
 
               <td className="px-6 py-4">
                 <svg
