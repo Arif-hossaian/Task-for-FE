@@ -25,10 +25,10 @@ const SignIn = () => {
   };
 
   const handleSubmitData = async (e: any) => {
+    e.preventDefault();
     if (!data.email && !data.password) {
       setError(true);
     }
-    e.preventDefault();
     try {
       await axios
         .post(`${baseURL}/login`, data)
@@ -51,10 +51,6 @@ const SignIn = () => {
     } catch (error) {
       console.log(error, 'server error');
     }
-  };
-
-  const validate = () => {
-    return !data.email && !data.password;
   };
 
   return (
@@ -116,7 +112,13 @@ const SignIn = () => {
 
                 {data.email === '' ? (
                   <>
-                    <span className="absolute inset-y-0 start-0 grid place-content-center px-4">
+                    <span
+                      className={clsx(
+                        error
+                          ? 'form-placeholder-svg-error'
+                          : 'form-placeholder-svg'
+                      )}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-4 w-4 text-gray-400"
@@ -132,7 +134,13 @@ const SignIn = () => {
                         />
                       </svg>
                     </span>
-                    <span className="ml-10 text-gray-400 absolute inset-y-0 start-0 grid place-content-center">
+                    <span
+                      className={clsx(
+                        error
+                          ? 'form-placeholder-text-error'
+                          : 'form-placeholder-text'
+                      )}
+                    >
                       Your Email
                     </span>
                   </>
@@ -147,10 +155,23 @@ const SignIn = () => {
                   value={data.password}
                   onChange={handleChange}
                 />
+                {error ? (
+                  <span className="text-xs text-red-600 mt-2 ">
+                    Please enter your password
+                  </span>
+                ) : (
+                  ''
+                )}
 
                 {data.password === '' ? (
                   <>
-                    <span className="absolute inset-y-0 start-0 grid place-content-center px-4">
+                    <span
+                      className={clsx(
+                        error
+                          ? 'form-placeholder-svg-error'
+                          : 'form-placeholder-svg'
+                      )}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -167,12 +188,24 @@ const SignIn = () => {
                       </svg>
                     </span>
 
-                    <span className="ml-10 text-gray-400 absolute inset-y-0 start-0 grid place-content-center">
+                    <span
+                      className={clsx(
+                        error
+                          ? 'form-placeholder-text-error'
+                          : 'form-placeholder-text'
+                      )}
+                    >
                       Your Password
                     </span>
                   </>
                 ) : null}
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                <span
+                  className={clsx(
+                    error
+                      ? 'form-placeholder-password-svg-error'
+                      : 'form-placeholder-password-svg'
+                  )}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 text-gray-400"
@@ -195,11 +228,22 @@ const SignIn = () => {
                   </svg>
                 </span>
               </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value=""
+                  className="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded "
+                />
+                <label className="ml-2 text-sm font-medium text-gray-400">
+                  Remember Me
+                </label>
+              </div>
 
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-[#377DFF] px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign In
                 </button>
@@ -210,7 +254,7 @@ const SignIn = () => {
               Dont have account?{' '}
               <Link
                 to="/"
-                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                className="font-semibold leading-6 text-[#377DFF] hover:text-indigo-500"
               >
                 Sign Up
               </Link>

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { baseURL } from '../../api/baseUrl';
 import { signInFailed, signIn } from '../../redux/slices/singInSlice';
 import { useDispatch } from 'react-redux';
+import clsx from 'clsx';
 
 const SignUp = () => {
   let navigate = useNavigate();
@@ -13,6 +14,7 @@ const SignUp = () => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(false);
   let userInfo: any = {};
   const handleChange = (e: any) => {
     const value = e.target.value;
@@ -23,6 +25,9 @@ const SignUp = () => {
   };
   const handleSubmitData = async (e: any) => {
     e.preventDefault();
+    if (!data.email && !data.password) {
+      setError(true);
+    }
     try {
       await axios
         .post(`${baseURL}/register`, data)
@@ -92,14 +97,27 @@ const SignUp = () => {
                   <input
                     type="email"
                     name="email"
-                    className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className={clsx(error ? 'input-validation' : 'input-style')}
                     value={data.email}
                     onChange={handleChange}
                   />
+                  {error ? (
+                    <span className="text-xs text-red-600 mt-2 ">
+                      plz enter a valid email address
+                    </span>
+                  ) : (
+                    ''
+                  )}
 
                   {data.email === '' ? (
                     <>
-                      <span className="absolute inset-y-0 start-0 grid place-content-center px-4">
+                      <span
+                        className={clsx(
+                          error
+                            ? 'form-placeholder-svg-error'
+                            : 'form-placeholder-svg'
+                        )}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-4 w-4 text-gray-400"
@@ -115,7 +133,13 @@ const SignUp = () => {
                           />
                         </svg>
                       </span>
-                      <span className="ml-10 text-gray-400 absolute inset-y-0 start-0 grid place-content-center">
+                      <span
+                        className={clsx(
+                          error
+                            ? 'form-placeholder-text-error'
+                            : 'form-placeholder-text'
+                        )}
+                      >
                         Your Email
                       </span>
                     </>
@@ -155,14 +179,27 @@ const SignUp = () => {
                 <input
                   type="password"
                   name="password"
-                  className="block w-full rounded-md border-0 p-2.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className={clsx(error ? 'input-validation' : 'input-style')}
                   value={data.password}
                   onChange={handleChange}
                 />
+                {error ? (
+                  <span className="text-xs text-red-600 mt-2 ">
+                    Please enter your password
+                  </span>
+                ) : (
+                  ''
+                )}
 
                 {data.password === '' ? (
                   <>
-                    <span className="absolute inset-y-0 start-0 grid place-content-center px-4">
+                    <span
+                      className={clsx(
+                        error
+                          ? 'form-placeholder-svg-error'
+                          : 'form-placeholder-svg'
+                      )}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -179,12 +216,24 @@ const SignUp = () => {
                       </svg>
                     </span>
 
-                    <span className="ml-10 text-gray-400 absolute inset-y-0 start-0 grid place-content-center">
+                    <span
+                      className={clsx(
+                        error
+                          ? 'form-placeholder-text-error'
+                          : 'form-placeholder-text'
+                      )}
+                    >
                       Your Password
                     </span>
                   </>
                 ) : null}
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                <span
+                  className={clsx(
+                    error
+                      ? 'form-placeholder-password-svg-error'
+                      : 'form-placeholder-password-svg'
+                  )}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4 text-gray-400"
@@ -207,11 +256,22 @@ const SignUp = () => {
                   </svg>
                 </span>
               </div>
+              <div className="flex items-center mb-4">
+                <input
+                  id="default-checkbox"
+                  type="checkbox"
+                  value=""
+                  className="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 rounded "
+                />
+                <label className="ml-2 text-sm font-medium text-gray-400">
+                  I agree to the Terms & Condition
+                </label>
+              </div>
 
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="flex w-full justify-center rounded-md bg-[#377DFF] px-3 py-2.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign Up
                 </button>
@@ -222,7 +282,7 @@ const SignUp = () => {
               Already have an account?{' '}
               <Link
                 to="/signin"
-                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                className="font-semibold leading-6 text-[#377DFF] hover:text-indigo-500"
               >
                 Sign In
               </Link>
