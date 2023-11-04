@@ -1,19 +1,15 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const PublicNavbar = () => {
   return (
     <nav className="bg-white border-gray-200 ">
       <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto py-4">
-        <a href="https://flowbite.com/" className="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8 mr-3"
-            alt="Flowbite Logo"
-          />
+        <NavLink to="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap ">
-            Flowbite
+            Stack
           </span>
-        </a>
+        </NavLink>
         <button
           data-collapse-toggle="navbar-default"
           type="button"
@@ -39,17 +35,12 @@ const PublicNavbar = () => {
           </svg>
         </button>
         <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white ">
-            <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 mr-20 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                aria-current="page"
-              >
-                Home
-              </a>
-            </li>
-          </ul>
+          <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
         </div>
       </div>
     </nav>

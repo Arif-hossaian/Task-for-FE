@@ -7,15 +7,17 @@ import Pagination from '../../components/dashboard/Pagination';
 const User = () => {
   const [dataList, setDataList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(1);
-  const fetchUsers = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(2);
+  const fetchUsers = async (page: number) => {
     try {
       setLoading(true);
       await axios
-        .get(`${baseURL}/users`)
+        .get(`${baseURL}/users?page=${page}`)
         .then((res: any) => {
           console.log(res.data.data);
           setDataList(res.data.data);
+          setTotalPages(res.data.total_pages);
           setLoading(false);
         })
         .catch((err: any) => {
@@ -31,16 +33,12 @@ const User = () => {
   };
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    fetchUsers(currentPage);
+  }, [currentPage]);
 
-  const selectPageHandler = (selectedPage: number) => {
-    if (
-      selectedPage >= 1 &&
-      selectedPage <= dataList.length / 3 &&
-      selectedPage !== page
-    ) {
-      setPage(selectedPage);
+  const handlePageChange = (newPage: any) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
     }
   };
 
@@ -49,12 +47,12 @@ const User = () => {
     <div className="px-10 mt-5">
       <h1 className="text-2xl font-semibold">User lists</h1>
       <div className="mt-10">
-        <UserListTable dataList={dataList} page={page} />
+        <UserListTable dataList={dataList} />
       </div>
       <Pagination
-        list={dataList}
-        page={page}
-        selectPageHandler={selectPageHandler}
+        totalPages={totalPages}
+        currentPage={currentPage}
+        selectPageHandler={handlePageChange}
       />
     </div>
   );

@@ -21,7 +21,7 @@ const UserListTable: FC<any> = ({ dataList, page }) => {
           </tr>
         </thead>
         <tbody>
-          {dataList.slice(page * 3 - 3, page * 3).map((i: any, _id: number) => (
+          {dataList.map((i: any, _id: number) => (
             <tr className="bg-white  hover:bg-gray-50" key={_id}>
               <td className="w-4 p-4">{i.id}</td>
               <th
