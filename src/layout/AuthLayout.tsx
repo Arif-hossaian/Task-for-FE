@@ -1,13 +1,17 @@
-import React, { FC } from 'react'
-import PublicNavbar from '../components/auth/PublicNavbar'
+import React, { FC, ReactNode } from 'react';
+import PublicNavbar from '../components/auth/PublicNavbar';
 
-const AuthLayout:FC<any> = ({children}) => {
-  return (
-    <div>
-        <PublicNavbar />
-        {children}
-    </div>
-  )
+interface AuthLayoutProps {
+  children: ReactNode;
 }
 
-export default AuthLayout
+const AuthLayout: FC<AuthLayoutProps> = ({ children }) => {
+  return (
+    <div>
+      <PublicNavbar />
+      {children}
+    </div>
+  );
+};
+
+export default AuthLayout;

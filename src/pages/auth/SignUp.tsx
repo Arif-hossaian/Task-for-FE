@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import AuthLayout from '../../layout/AuthLayout';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -16,14 +16,14 @@ const SignUp = () => {
   });
   const [error, setError] = useState(false);
   let userInfo: any = {};
-  const handleChange = (e: any) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setData({
       ...data,
       [e.target.name]: value,
     });
   };
-  const handleSubmitData = async (e: any) => {
+  const handleSubmitData = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!data.email && !data.password) {
       setError(true);

@@ -46,7 +46,7 @@ const Pagination: FC<PaginationProps> = ({
               </svg>
             </div>
           </li>
-          {pageNumbers.map((pageNumber) => (
+          {pageNumbers.map((pageNumber: number) => (
             <li
               key={pageNumber}
               onClick={() => selectPageHandler(pageNumber)}
